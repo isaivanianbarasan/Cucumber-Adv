@@ -3,18 +3,23 @@ import {expect} from 'chai'
 
 
 
+let result = 0
+let books: any[] = [];
+
+
+
 Given('I have the following books in the store', function (dataTable) {
-          
+          books = dataTable.hashes();
          });
 
          
-         When('I search for books for author Erik Larson', function () {
-           
-}
-         );
+         When('I search for books for author {string}', function (author:string) {
+          
 
-         Then('I find {int} books', function (int) {
-         // Then('I find {float} books', function (float) {
-           // Write code here that turns the phrase above into concrete actions
-           return 'pending';
+           result = books.filter(book => book.author === author).length;
          });
+
+        
+         Then('I find {int} books', function (expectedCount) {
+                  (expect(result).to.equal(expectedCount));
+                  });
